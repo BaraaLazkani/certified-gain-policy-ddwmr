@@ -1,0 +1,8 @@
+{
+ "python": "3.12.3",
+ "os": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+ "cpu_model": "13th Gen Intel(R) Core(TM) i5-13450HX",
+ "n_cores": 16,
+ "git_commit_experiment_agent": "e291e7dc7ca268b2de7e1a9cf23bc2eef5dc0651",
+ "note": "experiments/ tree is not yet under git; hash refers to the experiment-agent skill repo state"
+}

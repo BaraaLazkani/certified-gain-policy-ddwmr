@@ -1,0 +1,23 @@
+{
+ "seed": 31415,
+ "n_runs": 20,
+ "T_sw": 2.0,
+ "budgets": {
+  "halt1cm_pnn": {
+   "wall_s": 39.02672248500039,
+   "n_runs": 20
+  },
+  "tol5cm_pnn": {
+   "wall_s": 32.44773504299974,
+   "n_runs": 20
+  },
+  "timer_pnn": {
+   "wall_s": 18.935776014000112,
+   "n_runs": 20
+  },
+  "halt1cm_fixedL1": {
+   "wall_s": 37.553782723999575,
+   "n_runs": 20
+  }
+ }
+}

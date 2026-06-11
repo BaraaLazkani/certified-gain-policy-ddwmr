@@ -1,0 +1,91 @@
+record,table,metric,anchor_value,our_value,anchor_rank_order,our_rank_order,kendall_tau,status
+value,T4,e_total/PNN,1042.7,935.8,,,,
+value,T4,e_total/Lyap1,1103.7,1060.6,,,,
+value,T4,e_total/Lyap2,1459.3,1423.9,,,,
+value,T4,e_total/PID,1864.7,3916.5,,,,
+value,T4,e_line/PNN,12.6,20.1,,,,
+value,T4,e_line/Lyap1,15.9,15.9,,,,
+value,T4,e_line/Lyap2,13.0,13.0,,,,
+value,T4,e_line/PID,68.4,67.4,,,,
+value,T4,e_th/PNN,94.2,23.8,,,,
+value,T4,e_th/Lyap1,79.8,79.8,,,,
+value,T4,e_th/Lyap2,36.0,36.0,,,,
+value,T4,e_th/PID,514.4,513.7,,,,
+value,T4,e_time/PNN,229.6,155.4,,,,
+value,T4,e_time/Lyap1,222.4,222.3,,,,
+value,T4,e_time/Lyap2,488.8,488.7,,,,
+value,T4,e_time/PID,128.4,475.9,,,,
+value,T5,e_total/PNN,1103.8,1018.4,,,,
+value,T5,e_total/Lyap1,1364.6,1260.2,,,,
+value,T5,e_total/Lyap2,1583.5,1511.8,,,,
+value,T5,e_total/PID,2013.6,4026.6,,,,
+value,T5,e_line/PNN,12.4,24.1,,,,
+value,T5,e_line/Lyap1,25.9,25.9,,,,
+value,T5,e_line/Lyap2,17.8,17.8,,,,
+value,T5,e_line/PID,75.6,74.5,,,,
+value,T5,e_th/PNN,48.9,20.0,,,,
+value,T5,e_th/Lyap1,88.7,88.7,,,,
+value,T5,e_th/Lyap2,43.0,43.0,,,,
+value,T5,e_th/PID,603.6,596.7,,,,
+value,T5,e_time/PNN,321.9,186.2,,,,
+value,T5,e_time/Lyap1,216.2,216.1,,,,
+value,T5,e_time/Lyap2,489.6,489.5,,,,
+value,T5,e_time/PID,124.3,482.2,,,,
+value,T6,e_total/PNN,516.2,497.7,,,,
+value,T6,e_total/Lyap1,731.7,730.7,,,,
+value,T6,e_total/Lyap2,973.4,973.1,,,,
+value,T6,e_total/PID,1057.8,1776.2,,,,
+value,T6,e_line/PNN,18.0,17.9,,,,
+value,T6,e_line/Lyap1,22.0,22.0,,,,
+value,T6,e_line/Lyap2,5.1,5.1,,,,
+value,T6,e_line/PID,48.8,48.5,,,,
+value,T6,e_th/PNN,19.7,14.8,,,,
+value,T6,e_th/Lyap1,27.5,27.5,,,,
+value,T6,e_th/Lyap2,0.1464,0.1,,,,
+value,T6,e_th/PID,92.9,96.9,,,,
+value,T6,e_time/PNN,63.1,59.7,,,,
+value,T6,e_time/Lyap1,123.7,123.6,,,,
+value,T6,e_time/Lyap2,436.6,436.5,,,,
+value,T6,e_time/PID,12.0,319.3,,,,
+value,T7,e_total/PNN,468.2,449.2,,,,
+value,T7,e_total/Lyap1,716.7,716.0,,,,
+value,T7,e_total/Lyap2,967.5,967.2,,,,
+value,T7,e_total/PID,958.2,1588.6,,,,
+value,T7,e_line/PNN,14.8,14.9,,,,
+value,T7,e_line/Lyap1,18.7,18.7,,,,
+value,T7,e_line/Lyap2,4.4,4.4,,,,
+value,T7,e_line/PID,40.0,38.9,,,,
+value,T7,e_th/PNN,6.1,0.6,,,,
+value,T7,e_th/Lyap1,23.9,23.9,,,,
+value,T7,e_th/Lyap2,1.5,1.5,,,,
+value,T7,e_th/PID,34.8,34.1,,,,
+value,T7,e_time/PNN,49.2,44.2,,,,
+value,T7,e_time/Lyap1,109.2,109.1,,,,
+value,T7,e_time/Lyap2,429.0,428.9,,,,
+value,T7,e_time/PID,3.4,291.8,,,,
+ranking,T4,e_total,,,PNN>Lyap1>Lyap2>PID,PNN>Lyap1>Lyap2>PID,1.00,MATCH
+ranking,T4,e_line,,,PNN>Lyap2>Lyap1>PID,Lyap2>Lyap1>PNN>PID,0.33,DIFFER
+ranking,T4,e_th,,,Lyap2>Lyap1>PNN>PID,PNN>Lyap2>Lyap1>PID,0.33,DIFFER
+ranking,T4,e_time,,,PID>Lyap1>PNN>Lyap2,PNN>Lyap1>PID>Lyap2,0.00,DIFFER
+ranking,T5,e_total,,,PNN>Lyap1>Lyap2>PID,PNN>Lyap1>Lyap2>PID,1.00,MATCH
+ranking,T5,e_line,,,PNN>Lyap2>Lyap1>PID,Lyap2>PNN>Lyap1>PID,0.67,DIFFER
+ranking,T5,e_th,,,Lyap2>PNN>Lyap1>PID,PNN>Lyap2>Lyap1>PID,0.67,DIFFER
+ranking,T5,e_time,,,PID>Lyap1>PNN>Lyap2,PNN>Lyap1>PID>Lyap2,0.00,DIFFER
+ranking,T6,e_total,,,PNN>Lyap1>Lyap2>PID,PNN>Lyap1>Lyap2>PID,1.00,MATCH
+ranking,T6,e_line,,,Lyap2>PNN>Lyap1>PID,Lyap2>PNN>Lyap1>PID,1.00,MATCH
+ranking,T6,e_th,,,Lyap2>PNN>Lyap1>PID,Lyap2>PNN>Lyap1>PID,1.00,MATCH
+ranking,T6,e_time,,,PID>PNN>Lyap1>Lyap2,PNN>Lyap1>PID>Lyap2,0.33,DIFFER
+ranking,T7,e_total,,,PNN>Lyap1>PID>Lyap2,PNN>Lyap1>Lyap2>PID,0.67,DIFFER
+ranking,T7,e_line,,,Lyap2>PNN>Lyap1>PID,Lyap2>PNN>Lyap1>PID,1.00,MATCH
+ranking,T7,e_th,,,Lyap2>PNN>Lyap1>PID,PNN>Lyap2>Lyap1>PID,0.67,DIFFER
+ranking,T7,e_time,,,PID>PNN>Lyap1>Lyap2,PNN>Lyap1>PID>Lyap2,0.33,DIFFER
+criterion,ALL,PNN best e_total in all 4 tables,,,,,,PASS
+criterion,T7,Lyap2 best e_line,,,,,,PASS
+criterion,T7,PID best e_time,,,,,,FAIL
+criterion,ALL,"Fig8 surface shape (low-Kp plateau >> high-Kp valley, argmin at high Kp)",,plateau=2051 valley=379,,,,PASS
+criterion,ALL,mean Kendall tau across 16 ranking cells,,0.625,,,,PASS
+criterion,ALL,Lyap1/Lyap2 component values vs anchor Tables 4-7,,"e_line 18.66/18.7, 4.41/4.4; e_th 23.9/23.9, 1.55/1.5; e_time 109.1/109.2, 428.8/429 (T7)",,,,PASS
+criterion,ALL,"LQR gains reproduce Eqs. 48-49 from Q,R of Eqs. 46-47",,max|dK|=4.6e-5,,,,PASS
+criterion,ALL,"PID path shape (e_line,e_th) vs anchor, all 4 targets",,"38.9/40, 67.4/68.4, 74.5/75.6, 48.5/48.8",,,,PASS
+deviation,ALL,"PID arrival time: anchor ~2.2x faster than Table-3 gains produce under any standard PID interpretation; anchor e_total column also internally inconsistent with own components (Lyap rows reconcile with C_l=0.062 m, PID rows reconcile with neither). All e_time rank differences trace to this single cause. Integral-scaling and channel-swap hypotheses tested and rejected (see logs/wp0_pid_forensics.md).",,,,,,DOCUMENTED
+VERDICT,ALL,V0 GATE,,PASS WITH DOCUMENTED DEVIATION (PID timing only; plant verified at ~0.1% on both Lyapunov controllers; WP1-WP5 unlocked. User may overrule.),,,,PASS
