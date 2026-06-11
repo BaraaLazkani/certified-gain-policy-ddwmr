@@ -1,0 +1,9 @@
+experiment_id: wp2_switching
+seed: 31415
+n_runs: 1000
+sequences: {n_waypoints: [5,20], spacing_m: [0.1,1.0], turn_angle_pm_pi: 0.7}
+conditions: [halt1cm_pnn, tol5cm_pnn, timer_pnn(T_sw=2.0s), halt1cm_fixedL1]
+gain_policy: WP0 PNN queried in body frame at every switch
+theory_bound: T_k = ln(4)/Kth + (2/Kp) ln((L_k+eps)/eps)
+series: full V(t), delta_v(t), delta_w(t) at 100 Hz for runs 0-49 per condition
+script: scripts/wp2_switching.py

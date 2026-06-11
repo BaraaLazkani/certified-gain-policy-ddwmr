@@ -1,0 +1,8 @@
+experiment_id: wp5_eval
+seed: 77
+cells: [anchor4 clean, anchor4 noisy x30 (NMPC x10), heldout30 clean,
+        heldout30 noisy x30 (NMPC excluded), paths x4 clean]
+heldout: {d: [1.0,1.5], abs_theta_pi: [0.7,0.9], n: 30}
+noise: {xy_m: 0.001, th_deg: 0.5}
+stats: Wilcoxon signed-rank ours vs each baseline, Holm correction, alpha 0.05
+script: scripts/wp5_eval.py, scripts/wp5_stats.py

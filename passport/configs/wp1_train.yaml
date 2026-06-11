@@ -1,0 +1,11 @@
+experiment_id: wp1_train
+seeds: [0,1,2,3,4,5,6,7,8,9]
+bptt: {iters: 150, batch: all-200-targets, lr: 3e-3, horizon_s: 14.0, dt: 0.001,
+       integrator: exact-ZOH inner LTI + trapezoidal pose (documented deviation
+                   from literal torch-RK4; cross-validated in tests/test_diffsim.py),
+       loss: anchor Eq.36 with fixed per-target C_l from brute force,
+       halt: straight-through latching at 1 cm}
+bo: {init: 5, iters: 20, gp: Matern-2.5 + White, acq: EI on 800 random candidates,
+     distill: anchor Table 2 recipe}
+rollout_accounting: per-target; eval rollouts logged separately (logs/wp1_budgets.json)
+script: scripts/wp1_train.py

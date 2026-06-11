@@ -1,0 +1,8 @@
+experiment_id: wp0_bruteforce
+seed: 20260612
+grid: {n_kp: 50, n_kth: 50, kp: [0.1, 1.0], kth: [0.5, 3.0]}   # SPEC_AMENDMENTS #1
+fig8_shape_check_box: {kp: [0.0, 1.0]}   # anchor original box, verification only
+targets: {n_workspace: 200, radii: [0.1, 1.0, 10], angles_pm_pi: 0.7, n_angles: 20}
+val_targets: [[-0.2,-0.5],[-0.3,0.5],[0.5,-0.5],[0.6,0.4]]
+sim: {dt: 0.001, T_max: 40.0, arrival_tol: 0.01, K_t: 3.5, V_max: 12.0}
+script: scripts/wp0_bruteforce.py

@@ -1,0 +1,12 @@
+experiment_id: wp3_robustness
+seed: 422026
+n_mc: 500
+dr_training: {tier: 0.20, params: [m,Ig,beta,Iw,r,Km,Ra], iters: 150, seeds: [0,1,2]}
+conditions: [nominal, params_pm10, params_pm20, params_pm30, noise_zm_low(1mm,0.5deg),
+             noise_zm_high(5mm,2deg), bias_add(5mm,1deg), slip_common_5, slip_common_15,
+             slip_diff_5, slip_diff_15, dist_torque_low(0.01Nm,0.5s),
+             dist_torque_high(0.05Nm,0.5s)]
+slip: intermittent duty 0.5 period 1.0 s
+failure_rule: not arrived within 3 x K_t x d_gs, or divergence
+E_normalization: fixed C_l = 1.0 m (relative H3 statement; documented)
+script: scripts/wp3_robustness.py

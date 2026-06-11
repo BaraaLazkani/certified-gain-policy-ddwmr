@@ -1,0 +1,7 @@
+experiment_id: wp0_verify
+seed: 20260612
+pnn: {arch: [128,64,64,64], act: [relu,relu,tanh,relu], epochs: 360, batch: 128,
+      lr: 0.001, betas: [0.9, 0.99]}   # anchor Table 2
+e_total_normalization: per-target brute-force max e_l (reverse-engineered anchor convention)
+component_normalization: C_l = 1.0 m
+script: scripts/wp0_verify.py
