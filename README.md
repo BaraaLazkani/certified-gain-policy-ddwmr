@@ -10,6 +10,13 @@ scripts accompanying the manuscript:
 All experiments are pure Python (NumPy/SciPy plant, PyTorch differentiable rollout,
 BoTorch contextual Bayesian optimization, CasADi/IPOPT NMPC, Stable-Baselines3 SAC).
 
+The plant model, task metric, and verification scenarios reimplement (from the
+published specification alone) the system studied in the anchor paper:
+A. Deeb, B. Alsaleh, and I. Hatem, "AI-Driven Control Strategy for DDWMR: Neural
+Network-Based Parameter Optimization and Real-Time Stabilization for Multi-Waypoint
+Navigation," *International Journal of Control, Automation, and Systems*, in press.
+All equation and table numbers in code comments refer to that paper.
+
 ## Layout
 
 ```

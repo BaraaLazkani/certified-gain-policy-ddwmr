@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the accompanying paper."
+title: "Certified Gain-Policy Learning for Waypoint-Halt DDWMR Navigation"
+authors:
+  - family-names: Lazkani
+    given-names: Baraa
+    orcid: "https://orcid.org/0009-0009-2501-4111"
+    affiliation: "Robotics and Intelligent Systems Department, Faculty of Engineering, Manara University, Latakia, Syria"
+repository-code: "https://github.com/BaraaLazkani/certified-gain-policy-ddwmr"
+license: MIT
+preferred-citation:
+  type: article
+  title: "Certified Gain-Policy Learning with Switching-Stability Guarantees for Waypoint-Halt Navigation of Differential-Drive Mobile Robots"
+  authors:
+    - family-names: Lazkani
+      given-names: Baraa
+      orcid: "https://orcid.org/0009-0009-2501-4111"
+  journal: "International Journal of Control, Automation, and Systems"
+  notes: "Submitted."
