@@ -1,0 +1,21 @@
+dr seed 0 iter 25: loss 848.3
+dr seed 0 iter 50: loss 876.1
+dr seed 0 iter 75: loss 882.5
+dr seed 0 iter 100: loss 894.9
+dr seed 0 iter 125: loss 883.2
+dr seed 0 iter 150: loss 903.8
+dr seed 0 done in 4710s
+dr seed 1 iter 25: loss 848.0
+dr seed 1 iter 50: loss 893.4
+dr seed 1 iter 75: loss 880.2
+dr seed 1 iter 100: loss 878.3
+dr seed 1 iter 125: loss 894.3
+dr seed 1 iter 150: loss 882.9
+dr seed 1 done in 7054s
+dr seed 2 iter 25: loss 862.3
+dr seed 2 iter 50: loss 859.3
+dr seed 2 iter 75: loss 865.3
+dr seed 2 iter 100: loss 886.7
+dr seed 2 iter 125: loss 885.1
+dr seed 2 iter 150: loss 884.3
+dr seed 2 done in 2164s

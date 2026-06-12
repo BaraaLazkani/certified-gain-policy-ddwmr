@@ -1,0 +1,150 @@
+[
+ {
+  "method": "bf",
+  "seed": -1,
+  "wall_s": 907.1,
+  "train_rollouts_per_target": 2500,
+  "eval_rollouts_total": 0,
+  "note": "wall time from wp0_bruteforce_log (515000 rollouts)"
+ },
+ {
+  "method": "bptt",
+  "seed": 3,
+  "wall_s": 7040.073040432,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 1,
+  "wall_s": 7280.074749126999,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 0,
+  "wall_s": 7286.311206069,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 2,
+  "wall_s": 7413.885418233001,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 4,
+  "wall_s": 7543.157508136,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 5,
+  "wall_s": 7425.261459118001,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 7,
+  "wall_s": 7398.101055608,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 9,
+  "wall_s": 7159.3710157509995,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 6,
+  "wall_s": 7447.512213098,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bptt",
+  "seed": 8,
+  "wall_s": 7369.7719360329975,
+  "train_rollouts_per_target": 150,
+  "eval_rollouts_total": 2000
+ },
+ {
+  "method": "bo",
+  "seed": 2,
+  "wall_s": 1511.1744795390005,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 0,
+  "wall_s": 1520.0465656779998,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 3,
+  "wall_s": 1533.8894014059988,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 1,
+  "wall_s": 1533.0616377250008,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 4,
+  "wall_s": 1540.5906764599968,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 7,
+  "wall_s": 1504.9695262489986,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 5,
+  "wall_s": 1525.2838699780004,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 6,
+  "wall_s": 1523.3126998810003,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 8,
+  "wall_s": 1516.392981033001,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ },
+ {
+  "method": "bo",
+  "seed": 9,
+  "wall_s": 1520.7308393839994,
+  "train_rollouts_per_target": 25,
+  "eval_rollouts_total": 0
+ }
+]

@@ -1,0 +1,5 @@
+halt1cm_pnn: wall=187s completed=100.0% diverged=0
+tol5cm_pnn: wall=129s completed=100.0% diverged=0
+timer_pnn: wall=146s completed=100.0% diverged=0
+halt1cm_fixedL1: wall=226s completed=100.0% diverged=0
+WP2 DONE

@@ -1,0 +1,11 @@
+{
+ "seed": 77,
+ "ours_bptt_seed": 9,
+ "sac_seed": 2,
+ "sac_median_return_tail": -3671.500874,
+ "noise": {
+  "xy_m": 0.001,
+  "th_deg": 0.5
+ },
+ "nmpc": "CasADi+IPOPT fallback (acados build unavailable); noisy reps capped at 10 on anchor4"
+}

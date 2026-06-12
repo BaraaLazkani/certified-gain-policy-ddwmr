@@ -1,0 +1,10 @@
+controller,per_tick_us,per_switch_inference_us,note
+ours,1.7584748500667047,46.229567498812685,inference once per waypoint switch
+ours_dr,1.7371227499097586,45.974312499311054,inference once per waypoint switch
+pnn_bf,1.7365865500323707,27.47664100024849,inference once per waypoint switch
+lyap1,1.2512017001427012,0.0,
+lyap2,1.2248075498064281,0.0,
+pid_table3,1.2245002002600813,0.0,
+pid_tuned,1.2049252996803261,0.0,
+nmpc,75888.70495612141,0.0,IPOPT fallback; p95=52 ms; acados ~1 ms (Frey et al. 2025)
+sac,140.99296600033995,0.0,

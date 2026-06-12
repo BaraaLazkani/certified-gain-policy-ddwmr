@@ -1,0 +1,5 @@
+method,median_E_ratio_final,median_frac_within_2pct,rollouts_per_target,speedup_vs_bf
+bf,1.0,1.0,2500,1.0
+bptt,1.1255439935295088,0.05,150,16.666666666666668
+bo,1.0040011466468528,0.7675000000000001,25,100.0
+bo_distilled,1.0624001309471816,0.2175,25,100.0
