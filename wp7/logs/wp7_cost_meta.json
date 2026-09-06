@@ -1,0 +1,23 @@
+{
+ "nproc": 5,
+ "seeds": 10,
+ "cpu": "x86_64",
+ "cores_available": 16,
+ "python": "3.12.3",
+ "bo_wall_s_per_seed": {
+  "2": 1461.7745918510009,
+  "1": 1501.7241570939987,
+  "0": 1503.368510237,
+  "3": 1514.2437788450006,
+  "4": 1518.0558111149985,
+  "6": 1296.6301352709997,
+  "7": 1304.954086146001,
+  "8": 1316.484463408,
+  "5": 1387.3141233489987,
+  "9": 1351.9165270939993
+ },
+ "bo_wall_s_median": 1424.5443575999998,
+ "bo_batch_wall_s": 2870.834052102,
+ "bo_core_seconds": 14156.466184409997,
+ "note": "Wall time per seed measured inside the worker; core-seconds is the sum over seeds, i.e. the parallelism-independent cost. The published comparison used Pool(8) for the grid and Pool(5) here, so wall times were not comparable; core-seconds is."
+}

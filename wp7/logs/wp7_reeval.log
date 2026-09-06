@@ -1,0 +1,18 @@
+certified BO policy : sigmoid/bo seed 8 (held-out E 542.5)
+box-only control    : sigmoid/bf seed 1 (held-out E 529.3)
+  anchor4    ours_bo_sigmoid   E    417.5  arr 100.0%
+  anchor4    ours_bf_sigmoid   E    256.1  arr 100.0%
+  anchor4    ours_bptt         E    347.7  arr 100.0%
+  anchor4    pnn_bf_linear     E    282.2  arr 100.0%
+  anchor4    lyap1             E    481.6  arr 100.0%
+  anchor4    lyap2             E    975.0  arr 100.0%
+  anchor4    pid_table3        E   1492.7  arr 100.0%
+  heldout30  ours_bo_sigmoid   E    542.5  arr 100.0%
+  heldout30  ours_bf_sigmoid   E    529.3  arr 100.0%
+  heldout30  ours_bptt         E    288.4  arr 100.0%
+  heldout30  pnn_bf_linear     E    632.8  arr 100.0%
+  heldout30  lyap1             E    445.0  arr 100.0%
+  heldout30  lyap2             E   1016.4  arr 100.0%
+  heldout30  pid_table3        E   2428.8  arr 100.0%
+
+wrote 14 rows -> wp7_reeval.csv
