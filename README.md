@@ -105,7 +105,10 @@ wp7/          correction campaign: results/, models/ (40 ablation checkpoints
 ```
 
 Every result row carries its configuration and seed; no result exists without them.
-Failures and divergences appear as rows, never dropped.
+Failures and divergences appear as rows, never dropped. WP0-WP5 keep one YAML per
+experiment in `passport/configs/`; WP7 records the same information — seed, checkpoints
+loaded, sweep grid, machine, core count and load average — in a `*_meta.json` beside
+each result in `wp7/logs/`.
 
 ## Reproducing
 
