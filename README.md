@@ -94,7 +94,7 @@ src/ddwmr/    plant model (6th-order voltage-level DDWMR), NPC + LQR controllers
 scripts/      one entry point per work package
 tests/        plant, metric and loop-delay unit tests
 passport/     WP0-WP5 record
-  environment/    lockfile, Python version, CPU, commit hash
+  environment/    lockfile, Python version, CPU model
   configs/        one YAML (with seed) per experiment
   results/*.csv   per-run rows behind every table and figure
   figures/        figures (PDF + PNG), regenerable from results/
@@ -114,7 +114,9 @@ each result in `wp7/logs/`.
 
 ```bash
 python -m venv .venv && .venv/bin/pip install -r passport/environment/requirements_lock.txt
-.venv/bin/python -m pytest tests/
+.venv/bin/python tests/test_sim.py     # plant, metric, RK4-vs-RK45 cross-check
+.venv/bin/python tests/test_diffsim.py # differentiable rollout and gradients
+.venv/bin/python tests/test_delay.py   # loop-delay path; zero delay is bit-identical
 
 # original campaign
 .venv/bin/python scripts/wp0_verify.py       # reproduction gate; run this first
