@@ -47,6 +47,32 @@ class Disturbances:
     dist_torque: np.ndarray | None = None   # (B,) step disturbance torque [N m]
     dist_t0: np.ndarray | None = None       # (B,) onset time [s]
     dist_dur: float = 0.5             # s
+    loop_delay_scope: str = "all"     # "all" | "pose" | "wheels" - which feedback
+                                      # path carries the delay (WP6 diagnostic)
+    loop_delay_s: float = 0.0         # transport delay on the feedback selected
+                                      # by loop_delay_scope (sensing +
+                                      # communication + actuation); ZOH, exact
+                                      # at multiples of dt
+    arrival_uses_measured: bool = False  # if True the arrival/switching test and
+                                      # the gain-policy query see the SAME pose
+                                      # the controller sees (delayed by
+                                      # loop_delay_s when the delay is on the
+                                      # pose path, plus the ZOH sensor offset)
+                                      # instead of the true plant state.
+                                      # Default False = historical oracle
+                                      # behaviour, so every existing result is
+                                      # bit-for-bit unchanged.
+    vel_bias: float = 0.0             # delta_v [m/s]: PERSISTENT ADDITIVE offset
+                                      # on the ACHIEVED body linear velocity.  The
+                                      # kinematics integrate v_true + delta_v while
+                                      # the encoders, the integrator and the
+                                      # observer keep reporting the unbiased wheel
+                                      # speeds, so the loop never sees it.  This is
+                                      # the quantity condition (C3) bounds
+                                      # (delta_v_bar < Kp_min * eps / 4); a POSE
+                                      # bias (bias_xy / bias_th) is a different
+                                      # disturbance and does not exercise (C3).
+                                      # Default 0.0 = no change to any existing run.
 
 
 @dataclass
@@ -99,12 +125,18 @@ def _pid_law(d, eth, Id, Ieth, v_act, w_act, g: PIDGains):
 # ------------------------------------------------------------------ derivative
 
 def _deriv(S, targets, ctrl_kind, gains, plant: PerturbedPlant, meas_off,
-           slip_r, slip_l, dist_acc):
+           slip_r, slip_l, dist_acc, S_ctrl=None, vel_bias=0.0):
     """Time derivative of the full closed loop for active rollouts.
 
     S: (B,15); targets: (B,2); meas_off: (B,3) sensor offset (noise+bias), ZOH;
     slip_r/slip_l: (B,) multiplicative wheel-speed factors for kinematics;
     dist_acc: (B,) additive wheel angular acceleration from disturbance torque.
+    S_ctrl: (B,15) the state the CONTROLLER observes.  Defaults to S (no delay).
+      Under a loop delay it is S(t-tau): pose and wheel speeds are delayed,
+      while the controller's own memory (eps, xhat, I_d, I_eth) is always
+      current because it lives inside the controller, not on the wire.
+    vel_bias: scalar delta_v [m/s] added to the achieved body linear velocity
+      just before the kinematics integrate it; unmeasured by the encoders.
     Returns dS (B,15) and aux dict (voltages, refs, actuals) for metrics.
     """
     x, y, th = S[:, 0], S[:, 1], S[:, 2]
@@ -113,8 +145,15 @@ def _deriv(S, targets, ctrl_kind, gains, plant: PerturbedPlant, meas_off,
     xhat = S[:, 9:13]
     Id, Ieth = S[:, 13], S[:, 14]
 
+    # what the controller sees (delayed feedback if S_ctrl was supplied)
+    if S_ctrl is None:
+        xc, yc, thc, wrc, wlc = x, y, th, wr, wl
+    else:
+        xc, yc, thc = S_ctrl[:, 0], S_ctrl[:, 1], S_ctrl[:, 2]
+        wrc, wlc = S_ctrl[:, 3], S_ctrl[:, 4]
+
     # --- measured pose (sensor model) ---
-    xm = x + meas_off[:, 0]; ym = y + meas_off[:, 1]; thm = th + meas_off[:, 2]
+    xm = xc + meas_off[:, 0]; ym = yc + meas_off[:, 1]; thm = thc + meas_off[:, 2]
 
     ex = targets[:, 0] - xm
     ey = targets[:, 1] - ym
@@ -123,8 +162,8 @@ def _deriv(S, targets, ctrl_kind, gains, plant: PerturbedPlant, meas_off,
 
     # actual body velocities (encoder-measured, used by PID derivative terms)
     n = NOMINAL
-    v_act = (n.r / 2.0) * (wr + wl)
-    w_act = (n.r / n.d) * (wr - wl)
+    v_act = (n.r / 2.0) * (wrc + wlc)
+    w_act = (n.r / n.d) * (wrc - wlc)
 
     if ctrl_kind == "lyap":
         v_ref, w_ref = _npc_law(d, eth, gains.Kp, gains.Kth)
@@ -152,17 +191,17 @@ def _deriv(S, targets, ctrl_kind, gains, plant: PerturbedPlant, meas_off,
     # kinematics with true r,d and wheel slip
     wr_eff = wr * slip_r
     wl_eff = wl * slip_l
-    v_true = (p.r / 2.0) * (wr_eff + wl_eff)
+    v_true = (p.r / 2.0) * (wr_eff + wl_eff) + vel_bias
     dx = v_true * np.cos(th)
     dy = v_true * np.sin(th)
     dth = (p.r / p.d) * (wr_eff - wl_eff)
 
     # integrators (Eqs. 44-45), measured wheel speeds
-    deps_r = wr_ref - wr
-    deps_l = wl_ref - wl
+    deps_r = wr_ref - wrc
+    deps_l = wl_ref - wlc
 
     # observer (Eqs. 50-51), NOMINAL model
-    y_meas = np.stack([wr, wl], axis=1)
+    y_meas = np.stack([wrc, wlc], axis=1)
     innov = y_meas - xhat[:, :2]
     dxhat = xhat @ A4_NOM.T + V @ B4_NOM.T + innov @ KE.T
 
@@ -195,6 +234,9 @@ class RunResult:
     diverged: np.ndarray       # bool (B,) — non-finite state or runaway
     seg_records: list | None = None   # per-segment dicts (waypoint mode)
     series: dict | None = None        # recorded time series (subset)
+    final_xy: np.ndarray | None = None   # (B,2) true planar position at loop exit
+    final_d: np.ndarray | None = None    # (B,) distance from final_xy to the target
+                                         # that was active at exit [m]
 
 
 def run_closedloop(targets, ctrl_kind, gains, *,
@@ -281,9 +323,23 @@ def run_closedloop(targets, ctrl_kind, gains, *,
         si = 0
 
     active = np.arange(B)          # original row ids of live rollouts
+    # pose the switching rule / gain policy observed on the current step,
+    # scattered back to original row ids (only rows in `rowsel` are valid)
+    pose_obs_full = np.zeros((B, 3))
     h = dt
     t = 0.0
     timer_elapsed = np.zeros(B)
+
+    # ---- loop transport delay (WP6): ZOH ring buffer of past full states ----
+    # Exact whenever loop_delay_s is a multiple of dt; hist[0] is S(t - tau).
+    delay_steps = int(round(dist.loop_delay_s / dt)) if dist.loop_delay_s > 0 else 0
+    if delay_steps and abs(dist.loop_delay_s / dt - delay_steps) > 1e-9:
+        raise ValueError(f"loop_delay_s={dist.loop_delay_s} is not a multiple "
+                         f"of dt={dt}; refusing to approximate a transport delay")
+    # circular buffer with a moving oldest-index: np.roll here would copy the
+    # whole buffer every step, which dominates the run at 50 ms delay.
+    hist = np.repeat(S[None, ...], delay_steps + 1, axis=0) if delay_steps else None
+    hidx = 0
 
     for step in range(n_steps):
         if active.size == 0:
@@ -328,12 +384,25 @@ def run_closedloop(targets, ctrl_kind, gains, *,
         psub = subset_plant(plant, rowsel)
 
         # ---- RK4 ----
-        k1, aux = _deriv(Ssub, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc)
-        k2_, _ = _deriv(Ssub + 0.5 * h * k1, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc)
-        k3, _ = _deriv(Ssub + 0.5 * h * k2_, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc)
-        k4, _ = _deriv(Ssub + h * k3, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc)
+        if delay_steps:
+            Sc = Ssub.copy()                      # start from current state
+            old = hist[hidx][rowsel]
+            if dist.loop_delay_scope in ("all", "pose"):
+                Sc[:, 0:3] = old[:, 0:3]          # delayed pose
+            if dist.loop_delay_scope in ("all", "wheels"):
+                Sc[:, 3:5] = old[:, 3:5]          # delayed wheel speeds
+        else:
+            Sc = None
+        vb = dist.vel_bias
+        k1, aux = _deriv(Ssub, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc, Sc, vb)
+        k2_, _ = _deriv(Ssub + 0.5 * h * k1, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc, Sc, vb)
+        k3, _ = _deriv(Ssub + 0.5 * h * k2_, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc, Sc, vb)
+        k4, _ = _deriv(Ssub + h * k3, tg, ctrl_kind, gsub, psub, moff, sr, sl, dacc, Sc, vb)
         Snew = Ssub + (h / 6.0) * (k1 + 2 * k2_ + 2 * k3 + k4)
         S[rowsel] = Snew
+        if delay_steps:
+            hist[hidx] = S                 # evict oldest, store newest
+            hidx = (hidx + 1) % (delay_steps + 1)
         t += h
         timer_elapsed[rowsel] += h
 
@@ -386,8 +455,25 @@ def run_closedloop(targets, ctrl_kind, gains, *,
             continue_mask = None
 
         # ---- arrival / switching ----
-        exn = cur_tgt[rowsel, 0] - Snew[:, 0]
-        eyn = cur_tgt[rowsel, 1] - Snew[:, 1]
+        # Which pose the SWITCHING RULE is allowed to see.  Historically this
+        # was always the true plant state Snew, i.e. an oracle: the controller
+        # acted on a delayed, noisy pose but the supervisor that declared
+        # arrival and switched gains read the plant directly.  With
+        # dist.arrival_uses_measured the rule reads the same signal the
+        # controller does -- the delayed pose (only when the delay is on the
+        # pose path; wheel-path delay leaves the pose current) plus this step's
+        # ZOH sensor offset.  hist[hidx] is S(t - tau) at the NEW time because
+        # the ring buffer was advanced immediately after the RK4 step.
+        if dist.arrival_uses_measured:
+            if delay_steps and dist.loop_delay_scope in ("all", "pose"):
+                pose_obs = hist[hidx][rowsel][:, :3] + moff
+            else:
+                pose_obs = Snew[:, :3] + moff
+        else:
+            pose_obs = Snew[:, :3]
+        pose_obs_full[rowsel] = pose_obs
+        exn = cur_tgt[rowsel, 0] - pose_obs[:, 0]
+        eyn = cur_tgt[rowsel, 1] - pose_obs[:, 1]
         dn = np.sqrt(exn * exn + eyn * eyn)
         if switch_policy == "timer" and seq_mode:
             hit = timer_elapsed[rowsel] >= switch_timer
@@ -436,7 +522,11 @@ def run_closedloop(targets, ctrl_kind, gains, *,
                         glive.Kp[cont] = g[:, 0]
                         glive.Kth[cont] = g[:, 1]
                     if ctrl_kind == "lyap" and gain_policy is not None:
-                        gnew = gain_policy(S[cont, :3], cur_tgt[cont])
+                        # same flag: query the policy on the pose the
+                        # controller actually has, not on the true state
+                        pq = (pose_obs_full[cont] if dist.arrival_uses_measured
+                              else S[cont, :3])
+                        gnew = gain_policy(pq, cur_tgt[cont])
                         glive.Kp[cont] = gnew[:, 0]
                         glive.Kth[cont] = gnew[:, 1]
                     # V just after retarget (same pose, new target, new gains)
@@ -467,7 +557,9 @@ def run_closedloop(targets, ctrl_kind, gains, *,
         energy=acc["energy"], peak_V=acc["peak_V"],
         sup_dv=acc["sup_dv"], rms_dv=np.sqrt(acc["sq_dv"] / npts),
         sup_dw=acc["sup_dw"], rms_dw=np.sqrt(acc["sq_dw"] / npts),
-        diverged=acc["diverged"], seg_records=seg_records, series=series)
+        diverged=acc["diverged"], seg_records=seg_records, series=series,
+        final_xy=S[:, :2].copy(),
+        final_d=np.linalg.norm(cur_tgt - S[:, :2], axis=1))
 
 
 def subset_plant(p: PerturbedPlant, rows):
