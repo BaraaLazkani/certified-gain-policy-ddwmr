@@ -1,6 +1,6 @@
 """Differentiable (PyTorch) closed-loop rollout for BPTT gain-policy training.
 
-Integrator design (documented deviation from blueprint's literal "torch RK4"):
+Integrator design (documented deviation from the spec's literal "torch RK4"):
 the 10-state inner block z = [wr wl ir il eps_r eps_l xhat(4)] is LINEAR
 time-invariant given the wheel-speed references u = (wr_ref, wl_ref) — the
 LQR feedback V = eps - K2 xhat is linear. We therefore discretize it EXACTLY

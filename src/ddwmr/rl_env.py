@@ -1,6 +1,6 @@
 """Gymnasium env for the SAC/PPO baseline (WP4).
 
-Per blueprint: observation (e_x, e_y, e_theta, w_r, w_l), action (V_r, V_l)
+Per the experiment spec: observation (e_x, e_y, e_theta, w_r, w_l), action (V_r, V_l)
 in [-12,12] V, reward = negative incremental anchor metric:
   running:  -(1.5 * perp/C_l + lambda_t) * dt * SCALE   (line + elapsed-time)
   terminal (arrival): -(2 * |dtheta|/pi + 2 * tanh(0.1*t_norm)) * SCALE

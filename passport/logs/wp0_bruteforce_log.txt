@@ -1,6 +1,6 @@
 seed=20260612
 n_targets=205 (+1 fig8 anchor-box surface)
-grid=50x50 gain box Kp[0.1,1.0] Kth[0.5,3.0] (SPEC_AMENDMENTS #1)
+grid=50x50 gain box Kp[0.1,1.0] Kth[0.5,3.0] (Kp_min = 0.1, not 0)
 total_rollouts=515000
 wall_time_s=907.1
 nproc=8

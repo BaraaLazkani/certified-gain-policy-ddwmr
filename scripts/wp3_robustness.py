@@ -5,7 +5,7 @@ Phase 1 (--train): train the DR gain policy by BPTT with plant parameters
 2018 recipe; mid tier). 3 seeds; the nominal policy comes from WP1 BPTT.
 
 Phase 2 (--eval): Monte-Carlo campaign, 500 runs x condition x controller.
-Conditions are SEPARATE and LABELED (SPEC_AMENDMENTS #3): parameter tiers
+Conditions are SEPARATE and LABELED: parameter tiers
 +-10/20/30%, zero-mean sensor noise low/high, additive sensor bias,
 common-mode slip, differential slip, step disturbance torque, clean nominal.
 Controllers: ours-nominal (WP1 BPTT), ours-DR, PNN (brute-force labels),
@@ -34,7 +34,7 @@ N_MC = 500
 RES = ROOT / "passport" / "results"
 MOD = ROOT / "passport" / "models"
 LOG = ROOT / "passport" / "logs"
-PERTURB_KEYS = ("m", "Ig", "beta", "Iw", "r", "Km", "Ra")  # blueprint WP3 list
+PERTURB_KEYS = ("m", "Ig", "beta", "Iw", "r", "Km", "Ra")  # WP3 perturbation list
 DR_TIER = 0.20
 DR_SEEDS = [0, 1, 2]
 DR_ITERS = 150

@@ -27,14 +27,14 @@ class PlantParams:
 
 NOMINAL = PlantParams()
 
-# ---- gain box (SPEC_AMENDMENTS #1: Kp_min = 0.1, NOT 0) ----
+# ---- gain box (Kp_min = 0.1, NOT 0: Kp = 0 stalls the outer loop) ----
 KP_MIN, KP_MAX = 0.1, 1.0
 KTH_MIN, KTH_MAX = 0.5, 3.0
 # anchor's original box, used ONLY for the Fig-8 surface shape comparison
 KP_MIN_ANCHOR_FIG8 = 0.0
 
 # ---- task constants ----
-DT = 1e-3                # s, fixed-step RK4 (blueprint §1)
+DT = 1e-3                # s, fixed-step RK4 (experiment spec)
 ARRIVAL_TOL = 0.01       # m (anchor §7.2)
 K_T = 3.5                # s/m desired traversal time gain (inferred: 6 m linear
                          # path x 3.5 = 21.0 s matches Figs. 29-32 exactly)

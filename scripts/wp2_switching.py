@@ -8,7 +8,7 @@ angle U(-0.7pi, 0.7pi)) x three switching policies:
 plus a fixed-gain control condition (Lyap1, halt1cm).
 
 Gains per segment from the WP0 PNN queried in the robot BODY frame at each
-switch. Theory-verification records per SPEC_AMENDMENTS #3:
+switch. Theory-verification records:
   - per-segment: L_k, gains, measured arrival time, eps, bound
         T_k = ln(4)/Kth + (2/Kp) ln((L_k+eps)/eps)
   - full V(t), delta_v(t), delta_w(t) series for runs 0-49 of each policy

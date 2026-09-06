@@ -5,6 +5,6 @@ nmpc: {backend: CasADi+IPOPT (acados build unavailable in env; Frey 2025 recipe 
        horizon_s: 1.0, N: 50, Ts: 0.02,
        internal_model: 5-state QSS (La/Ra=0.67ms << Ts; plant evaluated is full 7-state)}
 sac: {seeds: [0,1,2,3,4], steps: 500000, train_freq: 2,
-      deviation: blueprint said 1M; CPU-only 40fps made 1M x 5 infeasible;
+      deviation: spec said 1M; CPU-only 40fps made 1M x 5 infeasible;
       learning curves in logs/wp4_sac_curve_seed*.csv demonstrate convergence status}
 script: scripts/wp4_pid_tune.py, scripts/wp4_rl_train.py, src/ddwmr/nmpc.py

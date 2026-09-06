@@ -127,7 +127,7 @@ for tgt in map(tuple, val_targets):
                           ">".join(sorted(orr, key=orr.get)),
                           f"{tau:.2f}", "MATCH" if match else "DIFFER"])
 
-# blueprint-named gate criteria
+# gate criteria
 g1 = all(ranks(ours[t], "e_total")["PNN"] == 1 for t in map(tuple, val_targets))
 g2 = ours[(0.6, 0.4)]["Lyap2"]["e_line"] == min(v["e_line"] for v in ours[(0.6, 0.4)].values())
 g3 = ranks(ours[(0.6, 0.4)], "e_time")["PID"] == 1

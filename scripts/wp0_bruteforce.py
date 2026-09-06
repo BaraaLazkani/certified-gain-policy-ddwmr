@@ -1,7 +1,7 @@
 """WP0/WP1 brute-force reference run.
 
 Grid: 50x50 gains over the CORRECTED box Kp in [0.1,1.0], Kth in [0.5,3.0]
-(SPEC_AMENDMENTS #1) x 200 workspace targets (anchor Eqs. 40-41) plus the
+(Kp_min > 0) x 200 workspace targets (anchor Eqs. 40-41) plus the
 4 validation targets (Tables 4-7) and the Fig-8 target (0.45,0.77).
 For the Fig-8 target only, an ADDITIONAL surface over the anchor's original
 box Kp in [0,1] is computed for the shape comparison (verification artifact).
@@ -121,7 +121,7 @@ def main():
     with open(log_dir / "wp0_bruteforce_log.txt", "w") as f:
         f.write(f"seed={SEED}\nn_targets={nT} (+1 fig8 anchor-box surface)\n"
                 f"grid={N_KP}x{N_KTH} gain box Kp[{KP_MIN},{KP_MAX}] "
-                f"Kth[{KTH_MIN},{KTH_MAX}] (SPEC_AMENDMENTS #1)\n"
+                f"Kth[{KTH_MIN},{KTH_MAX}] (corrected gain box)\n"
                 f"total_rollouts={n_rollouts}\nwall_time_s={wall_total:.1f}\n"
                 f"nproc={nproc}\nT_max={T_MAX}\ndt=0.001\nK_t={K_T}\n"
                 f"divergences={int(diverged.sum())}\n"

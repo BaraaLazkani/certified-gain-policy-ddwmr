@@ -1,6 +1,6 @@
 """NMPC baseline (WP4) — CasADi + IPOPT multiple shooting.
 
-Blueprint-sanctioned fallback for acados (build not available in this
+Sanctioned fallback for acados (build not available in this
 environment); cf. Frey et al. 2025 for the acados recipe on a voltage-driven
 differential-drive robot. Voltage-level inputs, horizon 1 s (N=50, Ts=20 ms),
 receding horizon with warm start.
