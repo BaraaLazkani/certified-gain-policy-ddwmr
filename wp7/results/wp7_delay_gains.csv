@@ -1,0 +1,7 @@
+controller,ctrl_kind,n_targets,median_Kp,max_Kp,median_Kth,max_Kth
+ours_bptt,lyap,300,0.803792,0.945134,2.976616,2.995627
+ours_dr,lyap,300,0.668933,0.692554,2.985975,2.994511
+pnn_bf,lyap,300,0.895215,1.000000,2.867799,3.000000
+lyap1,lyap,300,0.800000,0.800000,1.700000,1.700000
+lyap2,lyap,300,0.500000,0.500000,2.500000,2.500000
+pid_table3,pid,300,,,,
