@@ -1,14 +1,14 @@
 scenario,controller,checkpoint,E_median_Cl1m,xt_rmse_median_m,arrival,diverged,Kp_median,Kth_median
 anchor4,ours_bo_sigmoid,wp7_sigmoid_bo_seed8.pt,417.55,0.02088,1.0000,0,0.849,2.051
 anchor4,ours_bf_sigmoid,wp7_sigmoid_bf_seed1.pt,256.13,0.02603,1.0000,0,0.943,1.972
-anchor4,ours_bptt,policy_bptt_seed9.pt  (what the paper actually evaluated),347.69,0.02892,1.0000,0,0.847,2.982
+anchor4,ours_bptt,policy_bptt_seed9.pt  (what was actually evaluated earlier),347.69,0.02892,1.0000,0,0.847,2.982
 anchor4,pnn_bf_linear,"pnn_wp0.pt  (anchor's PNN; linear head, NOT certified)",282.19,0.02447,1.0000,0,0.907,1.954
 anchor4,lyap1,"fixed gains (0.8, 1.7)",481.65,0.02954,1.0000,0,,
 anchor4,lyap2,"fixed gains (0.5, 2.5)",974.97,0.01502,1.0000,0,,
 anchor4,pid_table3,anchor Table 3 gains,1492.75,0.07985,1.0000,0,,
 heldout30,ours_bo_sigmoid,wp7_sigmoid_bo_seed8.pt,542.45,0.11188,1.0000,0,0.772,0.967
 heldout30,ours_bf_sigmoid,wp7_sigmoid_bf_seed1.pt,529.26,0.11276,1.0000,0,0.727,0.836
-heldout30,ours_bptt,policy_bptt_seed9.pt  (what the paper actually evaluated),288.36,0.14705,1.0000,0,0.964,2.980
+heldout30,ours_bptt,policy_bptt_seed9.pt  (what was actually evaluated earlier),288.36,0.14705,1.0000,0,0.964,2.980
 heldout30,pnn_bf_linear,"pnn_wp0.pt  (anchor's PNN; linear head, NOT certified)",632.78,0.08521,1.0000,0,0.677,1.285
 heldout30,lyap1,"fixed gains (0.8, 1.7)",445.03,0.11237,1.0000,0,,
 heldout30,lyap2,"fixed gains (0.5, 2.5)",1016.44,0.07048,1.0000,0,,
