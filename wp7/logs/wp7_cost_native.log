@@ -1,0 +1,16 @@
+[cost] start, loadavg 1.45 1.74 1.79
+grid, native batching: 2500-gain batch per target, 205 targets total, timing 5
+  target 1/5: 19s
+  target 2/5: 37s
+  target 3/5: 55s
+  target 4/5: 73s
+  target 5/5: 91s
+
+  grid: 18.1 s/target -> 3718 s serial for 512500 rollouts (7.26 ms/rollout)
+  BO  : 337 s serial for 5000 rollouts (67.40 ms/rollout incl. surrogate)
+
+  rollout saving :  102.5x
+  COST saving    :   11.0x  (serial, native batching)
+
+wrote wp7_cost_native.json
+[cost] exit=0 loadavg 2.09 1.89 1.85

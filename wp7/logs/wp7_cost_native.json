@@ -1,0 +1,14 @@
+{
+ "grid_targets_timed": 5,
+ "grid_batch": 2500,
+ "grid_targets_total": 205,
+ "grid_s_per_target": 18.13830009959929,
+ "grid_full_serial_s": 3718.3515204178548,
+ "grid_rollouts": 512500,
+ "grid_ms_per_rollout": 7.255320039839717,
+ "bo_serial_s": 337.0,
+ "bo_rollouts": 5000,
+ "rollout_ratio": 102.5,
+ "cost_ratio": 11.033684036848234,
+ "note": "Each method timed in the batching form its own script uses. Supersedes wp7_cost.py and wp7_cost_width.py, which reimplemented the grid with ~12x more call overhead, and the published Pool(8)-vs-Pool(5) comparison."
+}

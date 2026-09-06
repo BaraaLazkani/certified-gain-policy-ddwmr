@@ -1,0 +1,150 @@
+{
+ "script": "scripts/wp7_latency.py",
+ "purpose": "one harness, one statistic, every controller; replaces an earlier comparison that mixed a min against a mean",
+ "harness": {
+  "primitive": "time.perf_counter() around each individual call",
+  "statistics": [
+   "median",
+   "p95",
+   "mean",
+   "n"
+  ],
+  "budget_s": 4.0,
+  "n_min": 300,
+  "n_max": 30000,
+  "warmup_calls": 200,
+  "note": "repeat count n is set by a per-unit wall-clock budget bounded by [n_min, n_max]; the STATISTIC is identical for every unit, which is the point"
+ },
+ "machine": {
+  "cpu_model": "13th Gen Intel(R) Core(TM) i5-13450HX",
+  "cpu_count_logical": 16,
+  "cpu_cores_physical": 19,
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "loadavg_1_5_15_before": [
+   1.0673828125,
+   1.72998046875,
+   1.78857421875
+  ],
+  "loadavg_1_5_15_after": [
+   1.62890625,
+   1.7939453125,
+   1.80908203125
+  ],
+  "load_note": "timings are wall-clock on a shared desktop; a 1-minute load average approaching or exceeding the logical core count inflates the upper tail (p95, mean) of EVERY unit here, which is why the median is reported alongside them"
+ },
+ "versions": {
+  "python": "3.12.3",
+  "numpy": "2.4.6",
+  "torch": "2.12.0+cpu",
+  "torch_num_threads": 10
+ },
+ "nmpc": {
+  "n_targets": 6,
+  "T_max_s": 6.0,
+  "Ts_s": 0.02,
+  "N_hor": 50,
+  "solver": "CasADi/IPOPT",
+  "runs": [
+   {
+    "target": [
+     -0.4837,
+     -0.7623
+    ],
+    "arrived": true,
+    "t_end": 3.12,
+    "n_solves": 156,
+    "wall_s": 11.94
+   },
+   {
+    "target": [
+     0.1826,
+     -0.0897
+    ],
+    "arrived": true,
+    "t_end": 1.5,
+    "n_solves": 75,
+    "wall_s": 2.09
+   },
+   {
+    "target": [
+     0.2682,
+     -0.2425
+    ],
+    "arrived": true,
+    "t_end": 1.98,
+    "n_solves": 99,
+    "wall_s": 4.19
+   },
+   {
+    "target": [
+     0.6162,
+     0.362
+    ],
+    "arrived": true,
+    "t_end": 2.7,
+    "n_solves": 135,
+    "wall_s": 18.75
+   },
+   {
+    "target": [
+     0.259,
+     0.7302
+    ],
+    "arrived": true,
+    "t_end": 2.86,
+    "n_solves": 143,
+    "wall_s": 15.96
+   },
+   {
+    "target": [
+     0.6996,
+     -0.1267
+    ],
+    "arrived": true,
+    "t_end": 2.68,
+    "n_solves": 134,
+    "wall_s": 13.16
+   }
+  ],
+  "total_solves": 742,
+  "measured_here": true,
+  "carried_over_mean_us_wp4": 75888.70495612141,
+  "carried_over_note": "wp4_latency.csv recorded mean=75888.7 us with p95=52 ms in the same row; mean > p95 means that figure was outlier-dominated"
+ },
+ "sac": {
+  "available": true,
+  "seed": 2,
+  "median_return_tail": -3671.500874,
+  "median_us": 311.80050427792594,
+  "p95_us": 321.428501047194,
+  "mean_us": 314.17771465313433,
+  "min_us": 305.14399986714125,
+  "max_us": 1615.0259907590225,
+  "std_us": 16.389567758268736,
+  "n": 12680
+ },
+ "gain_policy": {
+  "bptt_seed": 9,
+  "sigmoid_ckpt": "policy_bptt_seed9.pt",
+  "linear_ckpt": "pnn_wp0.pt",
+  "prior_defect": "an earlier timing table assigned the 44.9 us sigmoid figure to the PNN row; the linear PNN is timed separately here"
+ },
+ "segment": {
+  "median_segment_s": 3.375,
+  "ticks_per_segment": 3375,
+  "dt_s": 0.001
+ },
+ "gains_note": {
+  "lyap1": [
+   0.8,
+   1.7
+  ],
+  "lyap2": [
+   0.5,
+   2.5
+  ],
+  "note": "the tick cost does not depend on the gain values"
+ },
+ "total_wall_s": 74.2
+}

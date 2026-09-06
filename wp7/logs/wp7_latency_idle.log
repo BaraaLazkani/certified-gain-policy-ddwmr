@@ -1,0 +1,36 @@
+== control ticks ==
+npc_law_only                 median=      1.776  p95=      3.302  mean=      1.969  min=     1.710  n=30000
+lyap_family_full_tick        median=     10.518  p95=     10.691  mean=     10.549  min=    10.193  n=30000
+pid_full_tick                median=     11.622  p95=     11.841  mean=     11.655  min=    11.286  n=30000
+== gain-policy inference (once per waypoint segment) ==
+gainpolicy_sigmoid_inference median=     46.433  p95=     48.695  mean=     46.710  min=    45.545  n=30000
+gainpolicy_linear_pnn_inference median=     28.328  p95=     29.383  mean=     28.465  min=    27.471  n=30000
+== SAC ==
+sac_predict                  median=    311.801  p95=    321.429  mean=    314.178  min=   305.144  n=12680
+== NMPC (measured by running rollout_nmpc) ==
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+  nmpc target (-0.484,-0.762) solves=156 arrived=True 11.94s
+  nmpc target (+0.183,-0.090) solves=75 arrived=True 2.09s
+  nmpc target (+0.268,-0.242) solves=99 arrived=True 4.19s
+  nmpc target (+0.616,+0.362) solves=135 arrived=True 18.75s
+  nmpc target (+0.259,+0.730) solves=143 arrived=True 15.96s
+  nmpc target (+0.700,-0.127) solves=134 arrived=True 13.16s
+nmpc_solve                   median=  19785.849  p95= 300705.548  mean=  87145.434  min= 18646.116  n=742
+ours_amortised_tick          median=     10.532  p95=     10.705  mean=     10.563  (derived)
+pnn_bf_amortised_tick        median=     10.526  p95=     10.700  mean=     10.557  (derived)
+
+wrote wp7/results/wp7_latency.csv
+wrote wp7/logs/wp7_latency_meta.json
+total wall 74.2 s
+
+-- NMPC / ours, same statistic each time --
+   median_us      1881.1x
+   p95_us        28127.0x
+   mean_us        8261.2x
+   MIXED (NMPC mean / ours min) = 8549.5x <- the published style of comparison

@@ -1,0 +1,10 @@
+unit_id,unit,median_us,p95_us,mean_us,min_us,max_us,std_us,n,controllers,note
+npc_law_only,partial_tick,1.7760,3.3020,1.9686,1.7100,9.3470,0.5139,30000,,outer-loop algebra alone; the quantity the original 1.8 us figure measured
+lyap_family_full_tick,control_tick,10.5180,10.6910,10.5488,10.1930,42.9730,0.3424,30000,"ours,ours_dr,pnn_bf,lyap1,lyap2","complete tick: error, NPC law, geometry, integral action, observer, inner LQR + saturation; shared by ours/ours_dr/pnn_bf/lyap1/lyap2"
+pid_full_tick,control_tick,11.6220,11.8410,11.6549,11.2860,22.7070,0.2669,30000,"pid_table3,pid_tuned","complete tick, dual-PID outer loop, same inner loop"
+gainpolicy_sigmoid_inference,inference,46.4330,48.6951,46.7100,45.5450,103.1280,1.5696,30000,"ours,ours_dr","GainMLP head=sigmoid (the certified BPTT policy, seed 9); forward pass under no_grad"
+gainpolicy_linear_pnn_inference,inference,28.3280,29.3826,28.4649,27.4710,53.4860,0.7137,30000,pnn_bf,"GainMLP head=linear (the anchor's supervised PNN, pnn_wp0.pt); measured separately - it is NOT the sigmoid figure"
+sac_predict,control_tick,311.8005,321.4285,314.1777,305.1440,1615.0260,16.3896,12680,sac,"stable-baselines3 SAC.predict(deterministic=True), seed 2; this IS the whole controller (obs -> voltages), CPU"
+nmpc_solve,control_tick,19785.8490,300705.5477,87145.4336,18646.1160,1452598.7530,282021.8781,742,nmpc,"CasADi/IPOPT per control tick (warm start + solve) at Ts=20 ms, N=50, measured over 6 closed-loop rollouts via rollout_nmpc; NOT carried over from wp4_latency.csv"
+ours_amortised_tick,derived,10.5318,10.7054,10.5626,10.2065,43.0036,,30000,"ours,ours_dr","DERIVED, not measured: full tick + inference/3375 ticks (median segment 3.38 s at dt=1 ms)"
+pnn_bf_amortised_tick,derived,10.5264,10.6997,10.5572,10.2011,42.9888,,30000,pnn_bf,"DERIVED, not measured: full tick + inference/3375 ticks (median segment 3.38 s at dt=1 ms)"
